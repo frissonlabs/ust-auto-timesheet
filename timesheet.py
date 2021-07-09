@@ -9,7 +9,9 @@ days = ["mon", "tue", "wed", "thu", "fri"]
 
 def fill_timesheet(webdriver, project_task, is_billable = True) -> None:
 	wait = WebDriverWait(webdriver, 10)
+	sleep(2)
 	workdays = [ day for day in days if float(webdriver.find_element_by_xpath("//a[@href='#" + day + "']").find_elements_by_tag_name("small")[-1].text) == 0]
+
 	for day in workdays:
 		webdriver.find_element_by_xpath("//a[@href='#" + day + "']").click()
 		
@@ -26,8 +28,7 @@ def fill_timesheet(webdriver, project_task, is_billable = True) -> None:
 		wait.until(lambda x: x.find_element_by_xpath("//button[@aria-label='Minus a hour']")).click()
 		sleep(1)
 		wait.until(lambda x: x.find_element_by_xpath("//span[contains(text(), 'Set')]")).find_element_by_xpath('..').click()
-
-		# webdriver.find_element_by_xpath("//label[@for='customCheckApplyToAll']").click()
+	
 		webdriver.find_element_by_xpath("//button[contains(text(), 'Add')]").click()
 
 def submit_timesheet(webdriver) -> None:
