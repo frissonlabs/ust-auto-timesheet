@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from time import sleep
 
 options = Options()
-# options.add_argument('--headless')
+options.add_argument('--headless')
 options.add_argument('--disable-gpu')  # Last I checked this was necessary.
 
 driver = webdriver.Chrome(options=options)
