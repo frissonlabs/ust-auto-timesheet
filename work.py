@@ -7,6 +7,8 @@ load_dotenv(dotenv_path=env_path)
 
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -16,7 +18,7 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')  # Last I checked this was necessary.
 
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 from login import handle_login_page
 from timesheet import fill_timesheet, submit_timesheet, get_timesheet_date_range
