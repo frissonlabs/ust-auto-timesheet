@@ -1,7 +1,12 @@
 # Setup
 
-Add the following environment variables under your Github Repo's "Settings" -> "Secrets":
+1. Install the Python dependencies via:
 
+```
+pip install -r requirements.txt
+```
+
+2. Add a `.env` file in the root directory of the repo with the following environment variables:
 ```
 UST_URL
 UST_USERNAME
@@ -12,4 +17,8 @@ In addition, convert your chosen security questions according to the following e
 
 "In what city or town was your first job?" -> `IN_WHAT_CITY_OR_TOWN_WAS_YOUR_FIRST_JOB`
 
-Voila! Once this is set up as a Github Action, it runs every Friday at 7PM UTC, or 12PM PST.
+3. Run the following to execute the script:
+
+```
+python work.py
+```
