@@ -48,24 +48,15 @@ def handle_login_page(webdriver: WebDriver, url, username, password, one_time_pa
 	submit_button = webdriver.find_element_by_id("submitButton")
 	submit_button.click()
 
+	sleep(0.5)
+	
 	diff_options_link = wait.until(lambda driver: driver.find_element_by_id("differentVerificationOption"))
 	diff_options_link.click()
 
-	sec_questions_link = webdriver.find_element_by_id("verificationOption2")
-	sec_questions_link.click()
+	sleep(0.5)
 
-	q1 = webdriver.find_element_by_id("question1")
-	key1 = q1.text.upper().replace(" ", "_").replace("'", "").replace("?", "")
-	a1_input = webdriver.find_element_by_id("answer1Input")
-	a1_input.send_keys(getenv(key1))
-
-	q2 = webdriver.find_element_by_id("question2")
-	key2 = q2.text.upper().replace(" ", "_").replace("'", "").replace("?", "")
-	a2_input = webdriver.find_element_by_id("answer2Input")
-	a2_input.send_keys(getenv(key2))
-
-	authenticate_button = webdriver.find_element_by_id("authenticateButton")
-	authenticate_button.click()
+	text_link = webdriver.find_element_by_id("verificationOption0")
+	text_link.click()
  
 	return wait.until(EC.url_matches("https://usttimesheet.azurewebsites.net/timesheet"))
 

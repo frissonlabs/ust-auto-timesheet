@@ -30,7 +30,7 @@ try:
 	date_range = get_timesheet_date_range(driver)
 	print("Starting timesheet submission for " + date_range)
 	# if can_submit_timesheet(driver):
-	fill_timesheet(driver, "Development")
+	fill_timesheet(driver, getenv("PROJECT_ID"), "Development")
 	submit_timesheet(driver)
 	print("Timesheet submitted for " + date_range)
 	# else:

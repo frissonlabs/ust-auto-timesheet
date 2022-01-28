@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 days = ["mon", "tue", "wed", "thu", "fri"]
 
 
-def fill_timesheet(webdriver, project_task, is_billable=True) -> None:
+def fill_timesheet(webdriver, project_id, project_task, is_billable=True) -> None:
     wait = WebDriverWait(webdriver, 10)
     sleep(2)
     workdays = [day for day in days if float(webdriver.find_element_by_xpath(
@@ -25,7 +25,7 @@ def fill_timesheet(webdriver, project_task, is_billable=True) -> None:
         project_select_el = wait.until(lambda x: x.find_element_by_xpath(
             "//label[contains(text(), 'Project Name')]/following-sibling::select"))
         project_select = Select(
-            project_select_el).select_by_value('WELL-2838-01-00')
+            project_select_el).select_by_value(project_id)
 
         Select(wait.until(lambda x: x.find_element_by_xpath(
             "//label[contains(text(), 'Task Name')]/following-sibling::select"))).select_by_value('0')
