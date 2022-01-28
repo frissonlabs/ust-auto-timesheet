@@ -13,12 +13,10 @@ UST_USERNAME
 UST_PASSWORD
 ```
 
-In addition, convert your chosen security questions according to the following examples and add them (along with the corresponding answers) to the environment variables:
-
-"In what city or town was your first job?" -> `IN_WHAT_CITY_OR_TOWN_WAS_YOUR_FIRST_JOB`
-
 3. Run the following to execute the script:
 
 ```
 python work.py
 ```
+
+4. You will be prompted for an SMS verification. Go ahead and provide that and the script will continue from there.
