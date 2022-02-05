@@ -1,15 +1,15 @@
+from os import getenv
+from pathlib import Path  # Python 3.6+ only
+from time import sleep
+
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-from time import sleep
+from selenium.webdriver.support.wait import WebDriverWait
 
-from os import getenv
-from dotenv import load_dotenv
-
-from pathlib import Path  # Python 3.6+ only
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
 
@@ -33,8 +33,8 @@ def handle_login_page(webdriver: WebDriver, url, username, password, one_time_pa
 
 	if not login_field.text:
 		login_field.send_keys(username)
-	sleep(0.5)
-	next_button = webdriver.find_element_by_xpath('//input[@type="submit"]')
+
+	next_button = wait.until(lambda driver: driver.find_element_by_xpath('//input[@type="submit"]'))
 	next_button.click()
 
 	try:
@@ -45,19 +45,11 @@ def handle_login_page(webdriver: WebDriver, url, username, password, one_time_pa
 	password_field = wait.until(lambda driver: driver.find_element_by_id("passwordInput"))
 	password_field.send_keys(password)
 
-	submit_button = webdriver.find_element_by_id("submitButton")
+	sleep(1)
+
+	submit_button = wait.until(lambda driver: driver.find_element_by_id("submitButton"))
 	submit_button.click()
 
-	sleep(0.5)
-	
-	diff_options_link = wait.until(lambda driver: driver.find_element_by_id("differentVerificationOption"))
-	diff_options_link.click()
-
-	sleep(0.5)
-
-	text_link = webdriver.find_element_by_id("verificationOption0")
-	text_link.click()
- 
 	return wait.until(EC.url_matches("https://usttimesheet.azurewebsites.net/timesheet"))
 
 		
