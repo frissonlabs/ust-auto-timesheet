@@ -47,16 +47,17 @@ def fill_timesheet(webdriver, project_id, project_task, is_billable=True) -> Non
 		print("exception")
 
 def submit_timesheet(webdriver) -> None:
-    webdriver.find_element_by_xpath(
-        "//button[contains(text(), 'Submit')]").click()
-    webdriver.switch_to.alert.accept()
-
+	wait = WebDriverWait(webdriver, 10)
+	submit_button = wait.until(lambda x: x.find_element_by_xpath("//button[contains(text(), 'Submit')]"))
+	webdriver.execute_script("arguments[0].scrollIntoView();", submit_button)
+	webdriver.execute_script("arguments[0].click();", submit_button)
+	webdriver.switch_to.alert.accept()
 
 def get_timesheet_date_range(webdriver) -> str:
-    try:
-        date_range: WebElement = WebDriverWait(webdriver, 30).until(
-            lambda x: x.find_element_by_class_name("dtnWeek")
-        )
-        return date_range.text
-    except Exception:
-        return "?"
+	try:
+		date_range: WebElement = WebDriverWait(webdriver, 30).until(
+			lambda x: x.find_element_by_class_name("dtnWeek")
+		)
+		return date_range.text
+	except Exception:
+		return "?"
